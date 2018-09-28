@@ -1,0 +1,64 @@
+.Textarea {
+  min-height: 3em;
+  max-width: 100%;
+  position: relative;
+  width: 100%;
+
+  &-text {
+    background: none;
+    border: 1px solid #04152a1a;
+    //  1.5px solid #444;
+    border-radius: /* 1. */ 5px;
+    color: #04152ab3;
+    font-size: 1em;
+    height: 100%;
+    outline: none;
+    padding-left: 1em;
+    padding-right: 1em;
+    position: absolute;
+    transition: 70ms;
+    width: 100%;
+    z-index: 2;
+  }
+
+  &-label {
+    background: #fff;
+    color: #04152ab3;
+    font-size: 1em;
+    left: 1em;
+    position: absolute;
+    top: calc(50% - 0.5em - 1.5px);
+    transition: 70ms;
+  }
+
+  &-text:hover:not(:focus) {
+    background: #04152a02;
+  }
+
+  &-text:focus {
+    box-shadow: 0 0 3px -1.5px #1539a7;
+  }
+
+  &-text:focus,
+  &-text:not(:placeholder-shown) {
+    border-color: #10498e;
+  }
+
+  &-text:focus + &-label,
+  &-text:not(:placeholder-shown) + &-label {
+    color: #10498e;
+    font-size: 0.75em;
+    padding-left: 0.25em;
+    padding-right: 0.25em;
+    top: -0.5em;
+    z-index: 3;
+  }
+
+  &-text:not(:focus):not(:placeholder-shown) {
+    border-color: #04152a1a;
+  }
+
+  &-text:not(:focus):not(:placeholder-shown) + &-label {
+    color: #04152a88;
+  }
+}

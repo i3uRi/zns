@@ -1,0 +1,35 @@
+library NameService
+
+let one_msg =
+  fun (msg : Message) =>
+    let nil_msg = Nil {Message} in
+    Cons {Message} msg nil_msg
+
+let code_success = Int32 1
+let code_failure = Int32 2
+
+contract NameService
+
+(* registrar : ByStr20 *)
+
+field names : Map String Address = Emp String Address
+
+transition claim (name : String)
+  is_owner = builtin eq 0x0000000000000000000000000000000000000000 _sender;
+  match is_owner with
+  | True  =>
+    builtin put names name _sender;
+    msg  = {_tag : ""; _recipient : _sender; _amount : Uint128 0; code : code_success};
+    msgs = one_msg msg;
+    send msgs
+  | False  =>
+    msg  = {_tag : ""; _recipient : _sender; _amount : Uint128 0; code : code_failure};
+    msgs = one_msg msg;
+    send msgs
+  end
+
+  transition getName ()
+  end
+
+
+end

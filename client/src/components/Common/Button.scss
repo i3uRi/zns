@@ -1,0 +1,26 @@
+.Button {
+  margin-top: 20px;
+  color: #fff;
+  transition: all 0.25s cubic-bezier(0.645, 0.045, 0.355, 1);
+  border-radius: 5px;
+  padding: 0 16px;
+  height: 48px;
+  font-size: 16px;
+  border: 0.125em solid rgba(3, 27, 78, 0.1);
+  width: 100%;
+  outline: none;
+  background-color: #38b6b2;
+  cursor: pointer;
+  font-weight: bold;
+  box-shadow: 2px 2px 0 #cefffd;
+
+  &:hover {
+    background-color: darken($color: #38b6b2, $amount: 5);
+  }
+
+  &:disabled {
+    box-shadow: none;
+    cursor: not-allowed;
+    background-color: lighten($color: #38b6b2, $amount: 12);
+  }
+}
