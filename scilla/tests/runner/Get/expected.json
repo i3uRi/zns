@@ -1,0 +1,43 @@
+{
+  "gas_remaining": "1670",
+  "message": {
+    "_tag": "Main.Get",
+    "_amount": "0",
+    "_accepted": "false",
+    "_recipient": "0x1234567890123456789012345678901234567890",
+    "params": [
+      {"vname": "code", "type": "Uint32", "value": "0"},
+      {
+        "vname": "owner",
+        "type": "ByStr20",
+        "value": "0xaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+      },
+      {
+        "vname": "data_address",
+        "type": "ByStr20",
+        "value": "0xbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb"
+      }
+    ]
+  },
+  "states": [
+    {"vname": "_balance", "type": "Uint128", "value": "1000"},
+    {
+      "vname": "names",
+      "type": "Map (String) (Pair (ByStr20) (ByStr20))",
+      "value": [
+        {
+          "key": "super-name",
+          "val": {
+            "constructor": "Pair",
+            "argtypes": ["ByStr20", "ByStr20"],
+            "arguments": [
+              "0xaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+              "0xbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb"
+            ]
+          }
+        }
+      ]
+    }
+  ],
+  "events": []
+}

@@ -1,35 +1,51 @@
-library NameService
+import BoolUtils PairUtils MyUtils
 
-let one_msg =
-  fun (msg : Message) =>
-    let nil_msg = Nil {Message} in
-    Cons {Message} msg nil_msg
+library RegistrarLib
 
-let code_success = Int32 1
-let code_failure = Int32 2
+contract Registrar
+(
+  registry_address            : ByStr20,
+  auction_buffer_length       : BNum,
+  auction_initial_length      : BNum,
+  auction_period_ending_block : BNum,
+  min_cost                    : Uint128,
+  buy_now_cost                : Uint128
+)
 
-contract NameService
+field names_f : Map String (Pair ((Pair (Uint128) (ByStr20))) (Pair (BNum) (Uint128))) = Emp String (Pair ((Pair (Uint128) (ByStr20))) (Pair (BNum) (Uint128)))
 
-(* registrar : ByStr20 *)
-
-field names : Map String Address = Emp String Address
-
-transition claim (name : String)
-  is_owner = builtin eq 0x0000000000000000000000000000000000000000 _sender;
-  match is_owner with
-  | True  =>
-    builtin put names name _sender;
-    msg  = {_tag : ""; _recipient : _sender; _amount : Uint128 0; code : code_success};
-    msgs = one_msg msg;
-    send msgs
-  | False  =>
-    msg  = {_tag : ""; _recipient : _sender; _amount : Uint128 0; code : code_failure};
-    msgs = one_msg msg;
-    send msgs
-  end
-
-  transition getName ()
-  end
-
-
+transition Get
+(
+  name: String
+)
+  names <- names_f;
+  value = builtin get names name
 end
+
+(* transition Open *)
+(* ( *)
+(*   name: String *)
+(* ) *)
+(*  *)
+(* end *)
+(*  *)
+(* transition Bid *)
+(* ( *)
+(*   name: String *)
+(* ) *)
+(*  *)
+(* end *)
+(*  *)
+(* transition Close *)
+(* ( *)
+(*   name: String *)
+(* ) *)
+(*  *)
+(* end *)
+(*  *)
+(* transition Buy *)
+(* ( *)
+(*   name: String *)
+(* ) *)
+(*  *)
+(* end *)

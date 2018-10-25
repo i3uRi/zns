@@ -1,0 +1,115 @@
+import BoolUtils PairUtils MyUtils
+
+library NameServiceLib
+
+let code_success = Uint32 0
+let code_failure = Uint32 1
+
+contract NameService
+(* Doc string *)
+
+
+(* Initial Parameters *)
+()
+
+
+(* Mutable fields *)
+(* field names = Map Name (Pair (Owner) (Data))*)
+
+field names : Map String (Pair (ByStr20) (ByStr20))
+            = Emp String (Pair (ByStr20) (ByStr20))
+
+(* Transitions *)
+(* Get, Has *)
+
+transition Transfer (name : String, to : ByStr20)
+  mem_names <- names;
+  mem_name = builtin get mem_names name;
+
+  fst_f = @fst (ByStr20) (ByStr20);
+  snd_f = @snd (ByStr20) (ByStr20);
+
+  match mem_name with
+  | Some value =>
+    owner = fst_f value;
+    data_address = snd_f value;
+    new_pair = Pair {(ByStr20) (ByStr20)} _sender _sender;
+    new_names = builtin put mem_names name new_pair;
+    names := new_names;
+    msg =
+      { _tag : "Main.Get"
+      ; _recipient : _sender
+      ; _amount : Uint128 0
+      ; code : code_success
+      ; owner : owner
+      ; data_address : data_address
+      };
+    msgs = one_msg msg;
+    send msgs
+  | None =>
+    msg =
+      { _tag : "Main.Transfer"
+      ; _recipient : _sender
+      ; _amount : Uint128 0
+      ; code : code_failure
+      };
+    msgs = one_msg msg;
+    send msgs
+  end
+end
+
+transition Get (name : String)
+  mem_names <- names;
+  mem_name = builtin get mem_names name;
+  match mem_name with
+  | Some n =>
+    fst_n_f = @fst (ByStr20) (ByStr20);
+    snd_n_f = @snd (ByStr20) (ByStr20);
+    owner = fst_n_f n;
+    data_address = snd_n_f n;
+    msg =
+      { _tag : "Main.Get"
+      ; _recipient : _sender
+      ; _amount : Uint128 0
+      ; code : code_success
+      ; owner : owner
+      ; data_address : data_address
+      };
+    msgs = one_msg msg;
+    send msgs
+  | None =>
+    msg =
+      { _tag : "Main.Get"
+      ; _recipient : _sender
+      ; _amount : Uint128 0
+      ; code : code_failure
+      };
+    msgs = one_msg msg;
+    send msgs
+  end
+end
+
+transition Has (name : String)
+  mem_names <- names;
+  contains_name = builtin contains mem_names name;
+  match contains_name with
+  | True =>
+    msg =
+      { _tag : "Main.Has"
+      ; _recipient : _sender
+      ; _amount : Uint128 0
+      ; code : code_success
+      };
+    msgs = one_msg msg;
+    send msgs
+  | False =>
+    msg =
+      { _tag : "Main.Has"
+      ; _recipient : _sender
+      ; _amount : Uint128 0
+      ; code : code_failure
+      };
+    msgs = one_msg msg;
+    send msgs
+  end
+end

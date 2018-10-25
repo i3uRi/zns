@@ -1,0 +1,25 @@
+{
+  "gas_remaining": "1919",
+  "message": null,
+  "states": [
+    { "vname": "_balance", "type": "Uint128", "value": "1000" },
+    {
+      "vname": "names_f",
+      "type": "Map (String) (Pair (ByStr20) (ByStr20))",
+      "value": [
+        {
+          "key": "super-name",
+          "val": {
+            "constructor": "Pair",
+            "argtypes": [ "ByStr20", "ByStr20" ],
+            "arguments": [
+              "0xaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+              "0xbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb"
+            ]
+          }
+        }
+      ]
+    }
+  ],
+  "events": []
+}

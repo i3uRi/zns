@@ -12,10 +12,11 @@ const zilliqa = new Zilliqa({
 console.log('Zilliqa Testing Script')
 
 const privateKey =
-  'dcf83f524d4ec4e67784803fda3c007e299f4476be50c76a6dc32d0e3023810c'
+  'cb95319f3d1f05a872ec85c1142f4831ad538713737853abdd2b3283108613a0'
 const address = zilliqa.util.getAddressFromPrivateKey(privateKey)
 const node = zilliqa.getNode()
-const code = fs.readFileSync('./contract.scilla')
+const code = s.readFileSync('./contract.scilla')
+
 console.log(`Privkey:  ${privateKey}`)
 console.log(`Pubkey:  ${zilliqa.util.getPubKeyFromPrivateKey(privateKey)}`)
 console.log(`Address: ${address}`)
@@ -55,17 +56,17 @@ function transaction(
 transaction(
   {code},
   {
-    vname: 'owner',
-    type: 'ByStr20',
-    value: '0x7bb3b0e8a59f3f61d9bff038f4aeb42cae2ecce8',
-  },
-  {
     vname: '_creation_block',
     type: 'BNum',
-    value: '100',
+    value: '50',
   },
 )
   .then(txHash => wrap(node.getTransaction, {txHash}))
   .then(() => wrap(node.getSmartContracts, {address}))
-  .then(smartContracts => console.log(JSON.stringify(smartContracts)))
+  .then(smartContracts =>
+    console.log(
+      'SmartContract:',
+      JSON.stringify(smartContracts[smartContracts.length - 1], null, 2),
+    ),
+  )
   .catch(console.error)

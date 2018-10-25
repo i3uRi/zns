@@ -1,0 +1,37 @@
+[
+  {
+    "vname": "_creation_block",
+    "type": "BNum",
+    "value": "1"
+  },
+  {
+    "vname": "registry_address",
+    "type": "ByStr20",
+    "value": "0xaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+  },
+  {
+    "vname": "auction_buffer_length",
+    "type": "BNum",
+    "value": "5"
+  },
+  {
+    "vname": "auction_initial_length",
+    "type": "BNum",
+    "value": "10"
+  },
+  {
+    "vname": "auction_period_ending_block",
+    "type": "BNum",
+    "value": "20"
+  },
+  {
+    "vname": "min_cost",
+    "type": "Uint128",
+    "value": "1"
+  },
+  {
+    "vname": "buy_now_cost",
+    "type": "Uint128",
+    "value": "1"
+  }
+]

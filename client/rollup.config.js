@@ -1,31 +1,31 @@
-import autoprefixer from 'autoprefixer'
+import fs from 'fs'
 import babel from 'rollup-plugin-babel'
-import builtins from 'rollup-plugin-node-builtins'
 import commonjs from 'rollup-plugin-commonjs'
-import globals from 'rollup-plugin-node-globals'
 import nodeResolve from 'rollup-plugin-node-resolve'
-import postcss from 'rollup-plugin-postcss'
 import { terser } from 'rollup-plugin-terser'
 
+const babelRc = JSON.parse(fs.readFileSync('.babelrc'))
+
+babelRc.presets[0][1].modules = false
+
 export default {
-  input: './main.js',
+  input: 'src/javascript/main.js',
+
   output: {
-    file: 'build/bundle.js', // Date.now().toString(16)
+    file: 'www/static/main.js',
     format: 'iife',
-    sourcemap: true,
+    sourcemap: process.env.NODE_ENV !== 'production',
   },
+
   plugins: [
-    postcss({
-      extensions: ['.scss'],
-      plugins: [autoprefixer()],
-      minimize: process.env.NODE_ENV === 'production',
-      extract: true,
+    babel({
+      ...babelRc,
+      babelrc: false,
     }),
-    babel({ exclude: ['node_modules/**', '**/*.scss'] }),
+
     nodeResolve(),
     commonjs(),
-    globals(),
-    builtins(),
+
     process.env.NODE_ENV === 'production' && terser(),
   ],
 }

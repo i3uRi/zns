@@ -1,0 +1,13 @@
+{
+  "gas_remaining": "1980",
+  "message": null,
+  "states": [
+    { "vname": "_balance", "type": "Uint128", "value": "1000" },
+    {
+      "vname": "names_f",
+      "type": "Map (String) (Pair (Pair (Uint128) (ByStr20)) (BNum))",
+      "value": []
+    }
+  ],
+  "events": []
+}
