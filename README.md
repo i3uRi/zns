@@ -2,6 +2,8 @@
 
 This is the core ZNS repo. I.e. Smart Contracts, Web Portal, and Ðapp Library.
 
+ZNS is scheduled for launch 2019.
+
 ## Installation
 
 Some packages are required to run things in the ZNS project.
