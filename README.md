@@ -14,7 +14,7 @@ Some packages are required to run things in the ZNS project.
   for development.
 - [`ag`](https://github.com/ggreer/the_silver_searcher) is an `ack` like file
   searcher.
-- [`nBrowsethode`](https://nodejs.org/) is a js engine.
+- [`hode`](https://nodejs.org/) is a js engine.
 - [`yarn`](https://yarnpkg.com/) is a package manager for `node`.
 - [Scilla](https://scilla.readthedocs.io) is the Zilliqa Smart Contract
   language. The `scilla-checker` and `scilla-runner` binaries need to be in your
