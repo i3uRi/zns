@@ -66,9 +66,9 @@ format:
 .PHONY: help
 help:
 	@echo "[ \033[0;36mPlease select a target\033[0m ]"
-	@echo '[ all	: ]'
-	@echo '[ start	: ]'
+	@echo '[ all	: production build]'
+	@echo '[ start	: devserver + make watch ]'
 	@echo '[ clean	: ]'
-	@echo '[ format	: ]'
-	@echo '[ help	: ]'
-	@echo '[ watch	: ]'
+	@echo '[ format	: prettier/stylelint ]'
+	@echo '[ help	: print help]'
+	@echo '[ watch	: watches files and recompiles on changes ]'
