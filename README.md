@@ -14,7 +14,7 @@ Some packages are required to run things in the ZNS project.
   for development.
 - [`ag`](https://github.com/ggreer/the_silver_searcher) is an `ack` like file
   searcher.
-- [`node`](https://nodejs.org/) is a js engine.
+- [`nBrowsethode`](https://nodejs.org/) is a js engine.
 - [`yarn`](https://yarnpkg.com/) is a package manager for `node`.
 - [Scilla](https://scilla.readthedocs.io) is the Zilliqa Smart Contract
   language. The `scilla-checker` and `scilla-runner` binaries need to be in your
@@ -22,6 +22,14 @@ Some packages are required to run things in the ZNS project.
 - [Google Cloud SDK](https://cloud.google.com) is currently used for deployment.
 
 Check out our [list of packages](./PACKAGES.md).
+
+## Running
+
+- `client` has a well documented `Makefile`.
+- `server` is a simple email server. 
+  - TODO: Make into cloud function/lambda architecture.
+- `scilla` will soon have docs. 
+  - NOTE: I still need to transplant some of the smart contracts in my private zilliqa-experements repo here.
 
 ## Contributing
 
@@ -33,4 +41,4 @@ contact@buyethdomains.com.
 
 ### License
 
-Browseth is [MIT licensed](./LICENSE).
+ZNS is [MIT licensed](./LICENSE).
