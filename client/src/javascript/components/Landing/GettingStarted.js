@@ -11,10 +11,10 @@ class GettingStarted extends Component {
       >
         <div className="container">
           <h2>Getting started</h2>
-          <div>Registrar</div>
-          <div>Manage</div>
-          <div>Wallet</div>
-          <div>Docs</div>
+          <span>Register</span>
+          <span>Manage</span>
+          <span>Use</span>
+          <span>Docs</span>
         </div>
       </section>
     )

@@ -5,9 +5,39 @@ all:
 	-cp -R public/ www/
 	NODE_ENV=production $(MAKE) -j2 javascript css
 
+.PHONY: clean
+clean:
+	@echo "[ $@	: \033[0;33mCleaning...\033[0m ]"
+	rm -rf www node_modules
+
+.PHONY: css
+css:
+	@echo "[ $@	: \033[0;35mProcessing...\033[0m ]"
+	-./scripts/compile-scss.js
+	@echo "[ $@	: \033[0;32mDone building\033[0m ]"
+
+.PHONY: javascript
+javascript:
+	@echo "[ $@	: \033[0;35mProcessing...\033[0m ]"
+	./node_modules/.bin/rollup -c --silent
+	@echo "[ $@	: \033[0;32mDone building\033[0m ]"
+
+.PHONY: start
+start:
+	$(MAKE) -j2 watch serve-nginx
+
 .PHONY: watch
-watch: all
-	watchman-make -p 'src/**/*.js' -t javascript -p 'src/**/*.scss' -t css
+watch:
+	-cp -R public/ www/
+	$(MAKE) -j2 watch-javascript watch-css
+
+.PHONY: watch-css
+watch-css:
+	-ag -l --nocolor -G ^./src/styles | entr -r make css
+
+.PHONY: watch-javascript
+watch-javascript:
+	-ag -l --nocolor -G ^./src/javascript | entr -r make javascript
 
 .PHONY: install
 install:
@@ -27,27 +57,6 @@ kill-serve-nginx:
 serve-nginx: fake-cert kill-serve-nginx
 	nginx -c $(root_dir)nginx.dev.conf
 
-.PHONY: start
-start:
-	$(MAKE) -j2 watch serve-nginx
-
-.PHONY: clean
-clean:
-	@echo "[ $@	: \033[0;33mCleaning...\033[0m ]"
-	rm -rf www node_modules
-
-.PHONY: css
-css:
-	@echo "[ $@	: \033[0;35mProcessing...\033[0m ]"
-	-./scripts/compile-scss.js
-	@echo "[ $@	: \033[0;32mDone building\033[0m ]"
-
-.PHONY: javascript
-javascript:
-	@echo "[ $@	: \033[0;35mProcessing...\033[0m ]"
-	./node_modules/.bin/rollup -c --silent
-	@echo "[ $@	: \033[0;32mDone building\033[0m ]"
-
 .PHONY: format
 format:
 	@echo "[ $@	: \033[0;36mFormatting...\033[0m ]"
@@ -58,13 +67,8 @@ format:
 help:
 	@echo "[ \033[0;36mPlease select a target\033[0m ]"
 	@echo '[ all	: ]'
-	@echo '[ container	: ]'
+	@echo '[ start	: ]'
 	@echo '[ clean	: ]'
-	@echo '[ css	: ]'
 	@echo '[ format	: ]'
 	@echo '[ help	: ]'
-	@echo '[ javascript	: ]'
-	@echo '[ kill-container	: ]'
-	@echo '[ serve	: ]'
-	@echo '[ serve-container	: ]'
 	@echo '[ watch	: ]'

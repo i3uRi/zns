@@ -1,7 +1,7 @@
 import { h } from 'preact'
 import { route } from 'preact-router'
 
-import { Layout } from '../Layout'
+import { ExtendedFooter, Layout } from '..'
 
 import { Community } from './Community'
 import { Credibility } from './Credibility'
@@ -23,47 +23,25 @@ export {
   Roadmap,
   Team,
   Testimonial,
-  //
   Landing,
   Landing as default,
 }
 
 const Landing = () => (
   <Layout>
-    <form
-      style={{
-        margin: 'auto',
-        border: '1px solid black',
-      }}
-      onSubmit={e => {
-        e.preventDefault()
-
-        const match = e.target[0].value.match(/(.+)(?:\.zil)?$/)
-
-        if (match) {
-          route('/bid?q=' + match[1] + '.zil')
-        }
-      }}
-    >
-      <input
-        style={{
-          paddingLeft: '1em',
-          paddingRight: '1em',
-          lineHeight: 1.5,
-          height: '3em',
-        }}
-        type="text"
-        placeholder="Search or enter name"
-      />
-      <button
-        style={{
-          padding: '1em',
-        }}
-        type="submit"
-      >
-        Go
-      </button>
-    </form>
+    <Hero />
+    <Pitch />
+    <GettingStarted />
+    <Credibility />
+    <Explainer />
+    <Testimonial />
+    {/* <Roadmap /> */}
+    <Community />
+    {/*
+      Maybe put on a separate page
+      <Team />
+    */}
+    <ExtendedFooter />
   </Layout>
 )
 Landing.displayName = 'Landing'
